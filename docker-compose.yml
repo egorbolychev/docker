@@ -4,10 +4,10 @@ services:
   web:
     build: .
     container_name: test_deploy_web
-    command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn exchange.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - ./app:/app/
-      - staticfiles:/app/static/
+      - ./exchange:/exchange/
+      - staticfiles:/exchange/static/
     expose:
       - 8000
     env_file:
@@ -29,7 +29,7 @@ services:
     build: ./nginx
     container_name: test_deploy_nginx
     volumes:
-      - staticfiles:/app/static/
+      - staticfiles:/exchange/static/
     ports:
       - 8008:80
     depends_on:
